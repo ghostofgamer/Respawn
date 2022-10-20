@@ -1,4 +1,4 @@
-public class Respawn : MonoBehaviour
+public class ControllerInstantiate : MonoBehaviour
 {
     [SerializeField] private Transform _path;
     [SerializeField] private GameObject[] _template;
