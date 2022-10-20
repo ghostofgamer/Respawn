@@ -2,8 +2,9 @@ public class RandomInstantiate : MonoBehaviour
 {
     [SerializeField] private Transform _path;
 
-    public GameObject Template;
+    public GameObject[] Template;
     private Transform[] _points;
+    private float _timeRespawn = 2f;
 
     private void Start()
     {
@@ -13,7 +14,6 @@ public class RandomInstantiate : MonoBehaviour
         {
             _points[i] = _path.GetChild(i);
         }
-
         StartCoroutine(Create());
     }
 
@@ -21,8 +21,8 @@ public class RandomInstantiate : MonoBehaviour
     {
         for (int i = 0; i < _points.Length; i++)
         {
-            GameObject newGameObject = Instantiate(Template, _points[i].position, Quaternion.identity);
+            GameObject newGameObject = Instantiate(Template[Random.Range(0, Template.Length)], _points[Random.Range(0, _points.Length)].position, Quaternion.identity);
+            yield return new WaitForSeconds(_timeRespawn);
         }
-        yield return new WaitForSeconds(2f);
     }
 }
